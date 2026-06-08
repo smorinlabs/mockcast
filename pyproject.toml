@@ -1,6 +1,6 @@
 [project]
 name = "mockcast"
-version = "0.1.0"
+version = "0.1.1"
 description = "Vaporware demos as code: render scripted terminal sessions to asciicast v3 (and GIF via agg)"
 license = "MIT"
 readme = "README.md"

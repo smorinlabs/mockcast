@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.metadata
 import subprocess
 import sys
 import tempfile
@@ -73,6 +74,11 @@ def cmd_gif(args: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="mockcast")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"mockcast {importlib.metadata.version('mockcast')}",
+    )
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     render_p = sub.add_parser("render", help="render a demo to a .cast file")

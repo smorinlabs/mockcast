@@ -20,9 +20,12 @@
     { "type": "fix", "section": "Bug Fixes" },
     { "type": "perf", "section": "Performance" },
     { "type": "refactor", "section": "Refactoring" },
-    { "type": "docs", "section": "Documentation" },
-    { "type": "ci", "section": "CI/CD" },
-    { "type": "test", "section": "Testing" },
-    { "type": "chore", "section": "Miscellaneous", "hidden": true }
+    { "type": "revert", "section": "Reverts" },
+    { "type": "docs", "section": "Documentation", "hidden": true },
+    { "type": "style", "section": "Styles", "hidden": true },
+    { "type": "chore", "section": "Miscellaneous", "hidden": true },
+    { "type": "test", "section": "Tests", "hidden": true },
+    { "type": "ci", "section": "CI/CD", "hidden": true },
+    { "type": "build", "section": "Build System", "hidden": true }
   ]
 }

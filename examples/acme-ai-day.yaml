@@ -1,0 +1,117 @@
+meta:
+  title: "acme ai — a day in the life"
+  term: { cols: 100, rows: 30, type: xterm-256color }
+  typing: { cps: 22, jitter: 0.35 }
+  prompt: "{user}@{host} {cwd} $ "
+  pauses: { after_command: 0.5, between_scenes: 1.2 }
+  idle_time_limit: 2.0
+  seed: 42
+  auto_markers: true
+
+vars: { user: maya, host: laptop, cwd: "~/acme" }
+
+scenes:
+  - name: onboard
+    steps:
+      - type: "acme ai profile install acme-team"
+      - output: |
+          Resolving acme-team…
+          ✔ claude-code   installed
+          ✔ codex         already up to date
+          ✔ gemini-cli    installed
+          ✔ synced 7 skills · logged in as maya
+        stream: lines
+      - pause: 1.0
+
+  - name: verify
+    steps:
+      - type: "acme ai doctor"
+      - output: |
+          claude-code  auto-updated → 1.4.2
+          codex        current
+          skills       7 synced (1 drift auto-fixed)
+          auth         ok
+        stream: lines
+      - pause: 0.8
+
+  - name: launch
+    steps:
+      - type: "acme ai launch"
+      - output: |
+          Starting Claude Code (macOS)…
+        stream: lines
+      - pause: 0.6
+
+  - name: usage
+    steps:
+      - type: "acme ai usage"
+      - output: |
+          tool          sessions   tokens
+          claude-code          3   182k
+          codex                1    24k
+        stream: lines
+      - pause: 0.8
+
+  - name: search
+    steps:
+      - type: "acme ai search recipe"
+      - output: |
+          No skills matched "recipe". Build one? → acme ai skill dev <name>
+        stream: lines
+      - pause: 0.8
+
+  - name: author
+    steps:
+      - type: "acme ai skill dev recipe-helper"
+      - output: |
+          recipe-helper → dev mode (hot-reload watching ./skills/recipe-helper)
+        stream: lines
+      - type: "acme ai skill restart recipe-helper"
+      - output: |
+          reloaded recipe-helper ✔
+        stream: lines
+      - pause: 0.8
+
+  - name: ship
+    steps:
+      - type: "acme ai skill sync"
+      - type: "acme ai skill publish recipe-helper"
+      - output: |
+          published recipe-helper@0.1.0 → acme-team registry
+        stream: lines
+      - pause: 0.8
+
+  - name: promote
+    steps:
+      - type: "acme ai skill use recipe-helper --production"
+      - output: |
+          recipe-helper: dev → production (active in maya's profile)
+        stream: lines
+      - pause: 0.8
+
+  - name: teammate
+    vars: { user: sam, host: workstation }
+    prompt: "{user}@{host} $ "
+    steps:
+      - banner: "─────────────  Sam's machine  ─────────────"
+      - type: "acme ai search recipe"
+      - output: |
+          recipe-helper@0.1.0   acme-team   ★ new
+        stream: lines
+      - type: "acme ai profile pull"
+      - output: |
+          pulled acme-team · installed recipe-helper@0.1.0
+        stream: lines
+      - pause: 0.8
+
+  - name: status
+    vars: { user: maya, host: laptop, cwd: "~/acme" }
+    steps:
+      - type: "acme ai status"
+      - output: |
+          profile     acme-team (locked)
+          tools       claude-code 1.4.2 · codex · gemini-cli
+          skills      8 active  (recipe-helper@0.1.0 ✔)
+          scope       user ⊕ team ⊕ project
+        stream: lines
+      - pause: 1.5

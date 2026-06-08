@@ -1,0 +1,56 @@
+# Styled-output showcase: bold, color, symbols, and an "Insight" box.
+#
+# Two authoring rules for ANSI:
+#   1. Use DOUBLE-QUOTED YAML strings so `\e` becomes a real ESC byte.
+#      (Block scalars `|` keep text literal and do NOT interpret `\e`.)
+#   2. `output` in instant mode does NOT add a trailing newline, so end each
+#      standalone line with `\n`. (Or use `stream: lines`, which adds `\r\n`
+#      per line and reveals them one at a time.)
+# Keep each line self-contained: open AND `\e[0m`-close its color on the same
+# line, so a line split never lets a color bleed.
+meta:
+  title: "styled output — ANSI showcase"
+  term: { cols: 90, rows: 30, type: xterm-256color }
+  typing: { cps: 24, jitter: 0.3 }
+  prompt: "\e[36m➜\e[0m \e[2m~/proj\e[0m $ "
+  pauses: { after_command: 0.5, between_scenes: 1.1 }
+  idle_time_limit: 2.0
+  seed: 7
+  auto_markers: true
+
+vars: {}
+
+scenes:
+  - name: header
+    steps:
+      - type: "agent build --demo"
+      - output: "\e[1m\e[35m▌ Coding Agent\e[0m  \e[2mv1.0 · opus\e[0m\n\e[2m────────────────────────────────────────\e[0m"
+        stream: lines
+      - pause: 0.6
+
+  - name: install
+    steps:
+      - output: "\e[1mResolving toolchain…\e[0m\n\e[32m✔\e[0m \e[1mruff\e[0m      \e[2mformat + lint\e[0m\n\e[32m✔\e[0m \e[1mty\e[0m        \e[2mtypecheck\e[0m\n\e[32m✔\e[0m \e[1mpytest\e[0m    \e[2m22 passed\e[0m\n\e[33m●\e[0m \e[1muv\e[0m        \e[2msyncing…\e[0m"
+        stream: lines
+      - pause: 0.7
+      - output: "\e[32m✔\e[0m \e[1muv\e[0m        \e[2mlocked\e[0m  \e[1m\e[32mall green\e[0m\n"
+      - pause: 0.6
+
+  - name: insight
+    steps:
+      - output: "\e[33m★ Insight \e[0m\e[2m─────────────────────────────────────\e[0m\n  ANSI lives in the \e[36mdata\e[0m, not the engine — \e[1moutput\e[0m is an\n  opaque string, so \e[35mbold\e[0m, \e[32mcolor\e[0m, and \e[34msymbols\e[0m just flow\n  straight through into a valid v3 \e[1m.cast\e[0m.\n\e[2m─────────────────────────────────────────────────\e[0m"
+        stream: lines
+      - pause: 1.0
+
+  - name: progress
+    steps:
+      - output: "\e[35m✻\e[0m \e[1mChurning…\e[0m \e[2m(thinking)\e[0m\n"
+      - pause: 0.5
+      - output: "\e[2m  metric            value\e[0m\n  \e[36mLCP\e[0m               \e[32m1.2s\e[0m  \e[32m✔\e[0m\n  \e[36mINP\e[0m               \e[33m210ms\e[0m \e[33m▲\e[0m\n  \e[36mCLS\e[0m               \e[32m0.02\e[0m  \e[32m✔\e[0m"
+        stream: lines
+      - pause: 0.9
+
+  - name: done
+    steps:
+      - output: "\e[42m\e[30m\e[1m DONE \e[0m \e[1mdemo rendered\e[0m \e[2m→ styled.cast\e[0m \e[32m✔\e[0m\n"
+      - pause: 1.2

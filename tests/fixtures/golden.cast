@@ -1,0 +1,8 @@
+{"version": 3, "term": {"cols": 80, "rows": 24, "type": "xterm-256color"}, "title": "golden"}
+[0.0, "m", "start"]
+[0.0, "o", "$ "]
+[0.1, "o", "h"]
+[0.1, "o", "i"]
+[0.1, "o", "\r\n"]
+[0.0, "o", "ok\r\n"]
+[0.08, "o", "done\r\n"]

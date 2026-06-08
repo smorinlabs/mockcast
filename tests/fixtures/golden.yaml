@@ -1,0 +1,15 @@
+meta:
+  title: "golden"
+  term: { cols: 80, rows: 24, type: xterm-256color }
+  typing: { cps: 10, jitter: 0 }
+  pauses: { after_command: 0.0, between_scenes: 0.0 }
+  prompt: "$ "
+  seed: 0
+  auto_markers: false
+scenes:
+  - name: s
+    steps:
+      - marker: "start"
+      - type: "hi"
+      - output: "ok\ndone"
+        stream: lines

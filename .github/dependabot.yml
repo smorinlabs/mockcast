@@ -1,0 +1,39 @@
+# Dependabot config — uv-aware Python + GitHub Actions.
+# Uses the native `uv` ecosystem so dependency updates regenerate uv.lock
+# alongside pyproject.toml (the `pip` ecosystem left uv.lock stale, failing
+# `uv sync --locked` in CI). `commit-message` prefixes keep commits
+# Conventional-Commits clean for commitlint.
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 5
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    groups:
+      python:
+        patterns: ["*"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    cooldown:
+      default-days: 5
+    open-pull-requests-limit: 5
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      github-actions:
+        patterns: ["*"]

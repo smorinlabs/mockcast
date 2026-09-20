@@ -17,12 +17,12 @@ jobs:
   contributors-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Update contributors
-        uses: smorinlabs/contributors-please-action@v1.0.6
+        uses: smorinlabs/contributors-please-action@v1.3.9
         with:
           app-id: ${{ secrets.CONTRIBUTORS_PLEASE_APP_ID }}
           private-key: ${{ secrets.CONTRIBUTORS_PLEASE_PRIVATE_KEY }}

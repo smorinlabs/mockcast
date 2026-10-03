@@ -8,6 +8,7 @@ multi-ecosystem-groups:
     schedule:
       interval: "weekly"
       day: "monday"
+    open-pull-requests-limit: 5
     commit-message:
       prefix: "chore"
       prefix-development: "chore"
@@ -20,7 +21,6 @@ updates:
     multi-ecosystem-group: "all-dependencies"
     cooldown:
       default-days: 5
-    open-pull-requests-limit: 5
     labels: ["dependencies"]
     groups:
       security-updates:
@@ -33,7 +33,6 @@ updates:
     multi-ecosystem-group: "all-dependencies"
     cooldown:
       default-days: 5
-    open-pull-requests-limit: 5
     labels: ["dependencies"]
     groups:
       security-updates:

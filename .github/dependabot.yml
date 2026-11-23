@@ -1,6 +1,12 @@
 # One Monday PR for routine updates across Python and GitHub Actions.
 # Native uv support keeps pyproject.toml and uv.lock in sync.
 # Each ecosystem retains its cooldown and a separate security-update group.
+#
+# Do not set `open-pull-requests-limit` on an entry that joins a
+# multi-ecosystem group. With that key present, GitHub kept running the
+# previous per-ecosystem config (old group names,
+# `multi-ecosystem-update: false` in the updater job definition) and opened
+# separate PRs. One weekly PR needs no limit.
 version: 2
 
 multi-ecosystem-groups:
@@ -20,7 +26,6 @@ updates:
     multi-ecosystem-group: "all-dependencies"
     cooldown:
       default-days: 5
-    open-pull-requests-limit: 5
     labels: ["dependencies"]
     groups:
       security-updates:
@@ -33,7 +38,6 @@ updates:
     multi-ecosystem-group: "all-dependencies"
     cooldown:
       default-days: 5
-    open-pull-requests-limit: 5
     labels: ["dependencies"]
     groups:
       security-updates:

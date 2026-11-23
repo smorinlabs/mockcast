@@ -44,3 +44,19 @@ byte-reproducible (seeded RNG, no timestamp). Ships example demos for an imagine
 ### Manual Verification
 - `asciinema play out.cast` — timed playback with navigable chapter markers
 - `mockcast gif examples/styled-output.yaml -o styled.gif --theme dracula` → valid GIF
+
+## [x] Project P02: Group Dependabot updates into one PR (no release)
+**Goal/Requirement**: Dependabot opens one weekly PR for the `all-dependencies`
+multi-ecosystem group instead of separate per-ecosystem PRs.
+- Remove `open-pull-requests-limit` from every `updates` entry in the group.
+
+**Out of Scope**
+- Changing schedules, cooldowns, labels, or security-update groups.
+
+### Tests & Tasks
+- [x] [P02-T01] Remove `open-pull-requests-limit` from the `uv` and `github-actions` entries
+- [x] [P02-T02] Comment in `.github/dependabot.yml` explaining why the key must stay absent
+- [ ] Regression Test Status: next Monday's Dependabot run opens one combined PR
+
+### Automated Verification
+- `.github/dependabot.yml` validates against the `vendor.dependabot` schema
